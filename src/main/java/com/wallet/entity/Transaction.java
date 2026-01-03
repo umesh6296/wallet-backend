@@ -7,12 +7,20 @@ import java.time.LocalDateTime;
 @Table(name = "transaction")
 public class Transaction {
 
+    public enum Status {
+        PENDING,
+        SUCCESS,
+        FAILURE
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "tx_id")
+    private String txId;
     private Long userId;
     private Double amount;
+    private LocalDateTime createdAt;
     private String type;   // CREDIT / DEBIT
     private String status; // SUCCESS / FAILED
     private LocalDateTime timestamp;
@@ -63,5 +71,21 @@ public class Transaction {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getTxId() {
+        return txId;
+    }
+
+    public void setTxId(String txId) {
+        this.txId = txId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
